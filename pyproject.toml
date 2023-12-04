@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "finappwb"
+version = "0.1.0"
+description = "Financial Approval System for WB"
+authors = ["deymonster <deymonster@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiogram = "^3.1.1"
+sqlalchemy = "^2.0.22"
+aiosqlite = "^0.19.0"
+emoji = "^2.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

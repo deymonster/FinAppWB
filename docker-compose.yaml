@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+
+  fin-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: fin-app
+    command: bash start.sh
+    volumes:
+      - ./src:/home/finapp
+    tty: true
+    restart: on-failure
+
+
+networks:
+  finappwb-network:
+    external: false

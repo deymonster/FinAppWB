@@ -1,0 +1,40 @@
+# Example of config.py
+TOKEN = "Your bot token is here"
+SQLALCHEMY_URL = "sqlite+aiosqlite:///db.sqlite3"
+
+USERS = [{
+    "tg_id": "",
+    "name": "",
+    "middle_name": "",
+    "last_name": "",
+    "confirmed_status": True
+}]
+
+ADDRESSES = [ here list of addresses of offices]
+
+ROLES = ['Администратор', 'Менеджер', 'Директор', 'Бухгалтер', 'default_role']
+
+
+OPERATION_TYPE = ['ТМЦ', 'Содержание', 'Авансовый отчет']
+
+REQUEST_STATUS = ["Черновик", "На рассмотрении", "Одобрена", "Отклонена", "Оплачена"]
+
+
+# NOTIFY MESSAGES
+
+REGISTRATION = "Администратор подтвердил вашу регистрацию! Вы можете пользоваться ботом"
+
+MANAGER_REQUEST_CONFIRM = "Ваша заявка одобрена!"
+MANAGER_REQUEST_REJECT = "Ваша заявка отклонена!"
+
+REQUEST_NEW = "Есть новая заявка!"
+
+DIRECTOR_ROLE_ID = 3
+ADMIN_ROLE_ID = 1
+MANAGER_ROLE_ID = 2
+ACCOUNTANT_ROLE_ID = 4
+DEFAULT_ROLE_ID = 5
+
+
+
+
