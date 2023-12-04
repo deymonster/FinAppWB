@@ -33,6 +33,12 @@ async def get_director():
         return result.scalars().first()
 
 
+async def get_admins():
+    async with async_session() as session:
+        stmt = select(User).options(selectinload(User.role)).where(User.role.id == config.ADMIN_ROLE_ID)
+        result = await session.execute(stmt)
+        return result.scalars().all()
+
 async def get_user_by_tg_id(tg_id: int):
     async with async_session() as session:
         stmt = select(User).options(selectinload(User.role)).where(User.tg_id == tg_id)
