@@ -22,12 +22,6 @@ router = Router()
 async def start(message: Message | CallbackQuery, state: FSMContext):
     """ Handler for /start command
 
-    Смотрим state - если пользователь уже работает с ботом
-    Если роли в state нет то смотрим роль пользователя в БД по его TG ID
-    Полученную роль или None записываем в state
-    Если роли нет то предлагаем пройти регистрацию
-    Используем клаву confirm_register с двумя инлайн кнопками на них висят два колбека
-    Если регистрируемся то срабатывает обработчик и переходим в user_registration
     """
 
     tg_id = message.from_user.id
