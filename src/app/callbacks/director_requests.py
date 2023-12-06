@@ -45,7 +45,7 @@ async def get_requests(callback: CallbackQuery, state: FSMContext) -> None:
                        f"Описание: {request.description}\n" \
                        f"Цель: {request.purpose}"
         buttons = []
-        if request.status_id == status["confirmed"]:
+        if request.status_id != status["confirmed"]:
             buttons = ["Одобрить заявку", "Отклонить заявку", "Просмотр медиа заявки"]
             callbacks = [f"confirm_request_{request.id}", f"reject_request_{request.id}", f"media_request_{request.id}"]
         else:
