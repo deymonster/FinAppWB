@@ -106,6 +106,8 @@ async def set_role_user(callback: CallbackQuery, state: FSMContext):
             ["Меню редактирования"],
             [f"edit_user_{user.id}"]
         ))
+    user = await get_user_by_id(user_id=user.id)
+    await state.update_data(current_user=user)
     await state.clear()
     await callback.answer()
 
