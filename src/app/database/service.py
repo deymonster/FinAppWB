@@ -35,7 +35,7 @@ async def get_director():
 
 async def get_admins():
     async with async_session() as session:
-        stmt = select(User).options(selectinload(User.role)).where(User.role.id == config.ADMIN_ROLE_ID)
+        stmt = select(User).options(selectinload(User.role)).where(User.role_id == config.ADMIN_ROLE_ID)
         result = await session.execute(stmt)
         return result.scalars().all()
 
