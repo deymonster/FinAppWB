@@ -1,5 +1,6 @@
 import logging
 import pdb
+from datetime import datetime
 
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 from sqlalchemy.orm import selectinload
@@ -28,10 +29,16 @@ async def get_user_by_id(user_id: int):
 
 async def get_director():
     async with async_session() as session:
-        stmt = select(User).options(selectinload(User.role)).where(User.role.id == config.DIRECTOR_ROLE_ID)
+        stmt = select(User).options(selectinload(User.role)).where(User.role_id == config.DIRECTOR_ROLE_ID)
         result = await session.execute(stmt)
         return result.scalars().first()
 
+
+async def get_accountant():
+    async with async_session() as session:
+        stmt = select(User).options(selectinload(User.role)).where(User.role_id == config.DIRECTOR_ROLE_ID)
+        result = await session.execute(stmt)
+        return result.scalars().first()
 
 async def get_admins():
     async with async_session() as session:
@@ -123,6 +130,15 @@ async def update_media(media_id: int, request_id: int):
                 media.request_id = request_id
 
 
+async def delete_media_by_file_id(media_id: int):
+    async with async_session() as session:
+        media = await session.get(Media, media_id)
+        if media:
+            stmt = delete(Media).where(Media.id == media_id)
+            await session.execute(stmt)
+            await session.commit()
+
+
 async def get_roles():
     async with async_session() as session:
         stmt = select(UserRole)
@@ -173,15 +189,24 @@ async def get_all_requests():
         return result.scalars().all()
 
 
-async def get_requests_with_status(status_id: int):
+async def get_requests_with_status(status_id: int, start_date: datetime = None, end_date: datetime = None):
+    """ Function to get requests with given status_id and optional start and end dates"""
     async with async_session() as session:
-        stmt = select(Request).options(selectinload(Request.type),
-                                       selectinload(Request.address),
-                                       selectinload(Request.media),
-                                       selectinload(Request.user),
-                                       selectinload(Request.status)).\
-            where(Request.status_id == status_id)
-        result = await session.execute(stmt)
+        query = select(Request).options(selectinload(Request.type),
+                                        selectinload(Request.address),
+                                        selectinload(Request.media),
+                                        selectinload(Request.user),
+                                        selectinload(Request.status)).\
+            filter(Request.status_id == status_id)
+        if start_date:
+            query = query.filter(Request.date >= start_date)
+
+        if end_date:
+            query = query.filter(Request.date <= end_date)
+        elif not end_date:
+            end_date = datetime.now().date()
+            query = query.filter(Request.date <= end_date)
+        result = await session.execute(query)
         return result.scalars().all()
 
 

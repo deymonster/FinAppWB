@@ -13,7 +13,7 @@ from app.middlewares.media_middle_ware import MediaMiddleWare
 from bot import bot
 
 from app.database.models import async_main
-from app.callbacks import admin_navigation, users_action, requests_action, director_requests
+from app.callbacks import admin_navigation, users_action, requests_action, director_requests, accountant_navigation
 
 
 # Создаем переменную контекста для хранения экземпляра бота
@@ -31,10 +31,8 @@ dp.include_routers(
     common_handlers.router,
     request_create.router,
     requests_action.router,
-    director_requests.router
-
-
-)
+    director_requests.router,
+    accountant_navigation.router)
 # bot_context.set(bot)
 
 

@@ -21,7 +21,7 @@ class RequestCreate(StatesGroup):
     set_summ = State()
     set_purpose = State()
     set_description = State()
-    set_media = State()
+    save_request = State()
 
 
 class EditName(StatesGroup):
@@ -60,3 +60,8 @@ class EditRequest(StatesGroup):
 
 class UpdateStatusRequest(StatesGroup):
     set_comment = State()
+
+
+class GetConfirmedRequestsByDate(StatesGroup):
+    get_start_date = State()
+    get_end_date = State()

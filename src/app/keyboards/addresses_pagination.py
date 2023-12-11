@@ -13,20 +13,20 @@ async def list_all_addresses(addresses, page=1, items_per_page=10, update=None):
             buttons.append([button])
         else:
             button = InlineKeyboardButton(text=f"{address.name}",
-                                          callback_data=f"update_address_{address.id}")
+                                          callback_data=f"uaddress_{address.id}")
             buttons.append([button])
     pagination_buttons = []
     if start_index > 0:
         if not update:
             prev_button = InlineKeyboardButton(text="<< Пред.", callback_data=f"address_page_{page - 1}")
         else:
-            prev_button = InlineKeyboardButton(text="<< Пред.", callback_data=f"update_address_page_{page - 1}")
+            prev_button = InlineKeyboardButton(text="<< Пред.", callback_data=f"u_address_page_{page - 1}")
         pagination_buttons.append(prev_button)
     if end_index < len(addresses):
         if not update:
             next_button = InlineKeyboardButton(text="След. >>", callback_data=f"address_page_{page + 1}")
         else:
-            next_button = InlineKeyboardButton(text="След. >>", callback_data=f"update_address_page_{page + 1}")
+            next_button = InlineKeyboardButton(text="След. >>", callback_data=f"u_address_page_{page + 1}")
         pagination_buttons.append(next_button)
     buttons.append(pagination_buttons)
     addresses_keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)

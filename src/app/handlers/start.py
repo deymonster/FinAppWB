@@ -75,8 +75,8 @@ async def start(message: Message | CallbackQuery, state: FSMContext):
             pattern = dict(
                 text='Главное меню',
                 reply_markup=inline_builder(
-                    ["👌 💰Одобренные заявки"],
-                    ["confirmed_requests"]
+                    ["👌 💰Получить одобренные заявки"],
+                    ["get_confirmed_requests"]
                 )
             )
             if isinstance(message, CallbackQuery):
