@@ -12,6 +12,7 @@ router = Router()
 
 @router.callback_query(F.data == "users")
 async def get_all_users(callback: CallbackQuery) -> None:
+    """Admin handler for callback users"""
     users = await get_users()
     for user in users:
 
@@ -31,6 +32,7 @@ async def get_all_users(callback: CallbackQuery) -> None:
 
 @router.callback_query(F.data == "requests")
 async def get_requests(callback: CallbackQuery, state: FSMContext) -> None:
+    """Admin handler for callback requests"""
     data = await state.get_data()
     current_user = data.get("current_user")
     # pdb.set_trace()
@@ -60,6 +62,14 @@ async def get_requests(callback: CallbackQuery, state: FSMContext) -> None:
     await callback.message.answer("Главное меню", reply_markup=inline_builder("◀️ Назад", "main_page"))
 
 
+@router.callback_query(F.data == "backup")
+async def backup_menu(callback: CallbackQuery) -> None:
+    """Admin handler for callback backup - display menu"""
+    await callback.message.edit_text("Выьберите необходимое действие", reply_markup=inline_builder(
+        ["Сохранить БД", "Восстановить БД"],
+        ["save_db", "restore_db"]
+    ))
+    await callback.answer()
 
 
 
