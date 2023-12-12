@@ -5,8 +5,7 @@ from aiogram.fsm.context import FSMContext
 from app.notify.notify_utils import notify_user_test, send_csv
 from app.states import GetConfirmedRequestsByDate
 import config
-from app.database.service import get_users, get_all_requests, get_user_by_tg_id, get_requests_by_user_id, \
-    get_requests_with_status
+from app.database.service import get_requests_with_status
 from dateutil.parser import parse
 
 router = Router()
