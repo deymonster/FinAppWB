@@ -8,12 +8,14 @@ from aiogram import Dispatcher
 
 # from app.handlers import router
 # from app.handlers import user_registration
-from app.handlers import user_registration, start, admin_handlers, common_handlers, request_create
+from app.handlers import user_registration, start, \
+    admin_handlers, common_handlers, request_create
 from app.middlewares.media_middle_ware import MediaMiddleWare
 from bot import bot
 
 from app.database.models import async_main
-from app.callbacks import admin_navigation, users_action, requests_action, director_requests, accountant_navigation
+from app.callbacks import admin_navigation, users_action, \
+    requests_action, director_requests, accountant_navigation
 
 
 # Создаем переменную контекста для хранения экземпляра бота
