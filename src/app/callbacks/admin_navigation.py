@@ -5,6 +5,7 @@ from aiogram.fsm.context import FSMContext
 import config
 from app.database.service import get_users, get_all_requests, get_user_by_tg_id, get_requests_by_user_id
 from app.keyboards.builders import inline_builder
+from bot import bot
 import pdb
 
 router = Router()
@@ -72,4 +73,15 @@ async def backup_menu(callback: CallbackQuery) -> None:
     await callback.answer()
 
 
+@router.callback_query(F.data == "save_db")
+async def send_db_to_admin(callback: CallbackQuery, state: FSMContext) -> None:
+    """Admin handler to send db.sqlite3 to admin"""
+    data = await state.get_data()
+    current_user = data.get("current_user")
+    if current_user.role_id == config.ADMIN_ROLE_ID:
+        with open('db.sqlite3') as db_file:
+            await bot.send_document(chat_id=current_user.tg_id, document=db_file, caption="Database file")
+            await callback.answer()
+    else:
+        await callback.message.answer("You don't have access!")
 

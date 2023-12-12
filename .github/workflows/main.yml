@@ -44,7 +44,6 @@ jobs:
             docker rm fin-app;
             make stop;
             git pull origin main;
-            git reset --hard origin/main;
             make build;
             make run;
             
