@@ -40,7 +40,7 @@ jobs:
       - name: Build and tag image
         run: |
           make build
-          docker tag fin-app:latest $LOGIN/$NAME:${GITHUB_REF:11}
+          docker tag fin-app $LOGIN/$NAME:${GITHUB_REF:11}
       - name: Push image to DockerHub
         run:
           docker push $LOGIN/$NAME:${GITHUB_REF:11}
