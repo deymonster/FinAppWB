@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     container_name: fin-app
-    command: bash start.sh
+    command: python run.py
     volumes:
       - ./src:/home/finapp
     tty: true
