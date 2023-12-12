@@ -41,6 +41,7 @@ jobs:
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           command: |
             cd finappwb/FinAppWB;
+            docker rm fin-app;
             make stop;
             git pull origin main;
             make build;
