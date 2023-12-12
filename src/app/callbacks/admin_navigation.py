@@ -1,6 +1,7 @@
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
 from aiogram.fsm.context import FSMContext
+from aiogram.types import FSInputFile
 
 import config
 from app.database.service import get_users, get_all_requests, get_user_by_tg_id, get_requests_by_user_id
@@ -79,9 +80,9 @@ async def send_db_to_admin(callback: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     current_user = data.get("current_user")
     if current_user.role_id == config.ADMIN_ROLE_ID:
-        with open('db.sqlite3') as db_file:
-            await bot.send_document(chat_id=current_user.tg_id, document=db_file, caption="Database file")
-            await callback.answer()
+        db_file = FSInputFile('db.sqlite3')
+        await bot.send_document(chat_id=current_user.tg_id, document=db_file, caption="Database file")
+        await callback.answer()
     else:
         await callback.message.answer("You don't have access!")
 
