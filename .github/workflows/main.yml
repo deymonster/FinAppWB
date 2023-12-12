@@ -25,7 +25,7 @@ jobs:
       - name: Check codestyle
         run: pycodestyle ./src/*.py
 
-  build and deploy to DockerHub:
+  build_deploy:
     needs: [run_test]
     runs-on: ubuntu-latest
     env:
