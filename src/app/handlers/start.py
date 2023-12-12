@@ -35,8 +35,8 @@ async def start(message: Message | CallbackQuery, state: FSMContext):
             pattern = dict(
                 text='Главное меню',
                 reply_markup=inline_builder(
-                    ["👤 Пользователи", " 💰Заявки", "➕ Добавить заявку"],
-                    ["users", "requests", "add_request"]
+                    ["👤 Пользователи", " 💰Заявки", "➕ Добавить заявку", "🆘 Бекап БД"],
+                    ["users", "requests", "add_request", "backup"]
                 )
             )
             if isinstance(message, CallbackQuery):
