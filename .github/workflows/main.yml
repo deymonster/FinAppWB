@@ -39,7 +39,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           user: ${{ secrets.SERVER_USERNAME }}
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
+          command: |
             cd finappwb/FinAppWB;
             make stop;
             git pull origin main;
