@@ -60,6 +60,6 @@ jobs:
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           command: |
             docker stop fin-app;
-            docker pull $LOGIN/$NAME:${GITHUB_REF:11}
-            docker run -d $LOGIN/$NAME:${GITHUB_REF:11}
+            docker pull $LOGIN/$NAME:${GITHUB_REF:11};
+            docker run -d $LOGIN/$NAME:${GITHUB_REF:11};
         
