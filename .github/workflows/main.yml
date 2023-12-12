@@ -57,7 +57,7 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           user: ${{ secrets.SERVER_USERNAME }}
-          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           command: |
             docker stop fin-app;
             docker pull $LOGIN/$NAME:${GITHUB_REF:11}
