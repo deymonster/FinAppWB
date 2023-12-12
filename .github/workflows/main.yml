@@ -53,12 +53,13 @@ jobs:
       SERVER_HOST: ${{ secrets.SERVER_HOST }}
       SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
     steps:
-      - uses: webfactory/ssh-agent@v0.8.0
+      - uses: D3rHase/ssh-command-action@v0.2.2
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "docker stop fin-app"
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "docker pull $LOGIN/$NAME:${GITHUB_REF:11}"
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "docker run -d $LOGIN/$NAME:${GITHUB_REF:
-
-
+          host: ${{ secrets.SERVER_HOST }}
+          user: ${{ secrets.SERVER_USERNAME }}
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        command: |
+          docker stop fin-app;
+          docker pull $LOGIN/$NAME:${GITHUB_REF:11}
+          docker run -d $LOGIN/$NAME:${GITHUB_REF:11}
+        
