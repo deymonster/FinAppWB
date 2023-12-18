@@ -1,7 +1,7 @@
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
 from aiogram.fsm.context import FSMContext
-from aiogram.types import FSInputFile
+from aiogram.types import FSInputFile, ContentType, Message
 
 import config
 from app.database.service import get_users, get_all_requests, get_user_by_tg_id, get_requests_by_user_id
@@ -85,4 +85,17 @@ async def send_db_to_admin(callback: CallbackQuery, state: FSMContext) -> None:
         await callback.answer()
     else:
         await callback.message.answer("You don't have access!")
+
+
+@router.callback_query(F.data == "restore_db")
+async def send_db_to_admin(callback: CallbackQuery, state: FSMContext) -> None:
+    """Admin handler for receiveing db file from admin"""
+    await callback.message.answer("Загрузите файл БД")
+    await callback.answer()
+
+
+# @router.message(ContentType.DOCUMENT)
+# async def handle_document(message: Message):
+#     """Handle file from message"""
+#     pdb.set_trace()
 
